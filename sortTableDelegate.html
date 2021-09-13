@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    table {
+       border-collapse: collapse;
+     }
+     th, td {
+       border: 1px solid black;
+       padding: 4px;
+     }
+     th {
+       cursor: pointer;
+     }
+     th:hover {
+       background: yellow;
+     }
+  </style>
+</head>
+
+<body>
+
+  <table id="grid">
+    <thead>
+      <tr>
+        <th data-type="number">Age</th>
+        <th data-type="string">Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>5</td>
+        <td>John</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Pete</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>Ann</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Eugene</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Ilya</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    const data = createDictionary();
+    grid.addEventListener("click", function(){
+      const sortBy = event.target.getAttribute("data-type")
+      if(!sortBy) return;
+
+      if(sortBy === 'number'){
+        sortDictBy(data, "age")
+      }else if(sortBy === 'string'){
+        sortDictBy(data, "string")
+      }
+
+      const tBody = document.getElementsByTagName("tbody")[0];
+      const rows = tBody.getElementsByTagName("tr")
+      for(const sortedRow of data){
+        for(const row of rows){
+          const tDS = row.getElementsByTagName("td")
+          const age = Number(tDS[0].innerText)
+          const name = tDS[1].innerText
+          if(age === sortedRow.age && name === sortedRow.name){
+            tBody.appendChild(row)
+          }
+        }
+      }
+    });
+
+    function createDictionary(){
+      const rows = document.getElementsByTagName("td");
+      const data = []
+      let count = 0;
+      let rowD;
+      for(const row of rows){
+        if(!count){
+          rowD = {age: Number(row.innerText), name};
+          count++;
+        }else{
+          rowD.name = row.innerText;
+          count--;
+          data.push(rowD);
+        }
+      }
+      return data;
+    }
+
+    function sortDictBy(array, key){
+      if(key === "string"){
+        array.sort((a, b) => a["name"].localeCompare(b["name"]));
+      }else if(key === "age"){
+        array.sort((a, b) => a.age - b.age);
+      }
+    }
+  </script>
+
+</body>
+</html>

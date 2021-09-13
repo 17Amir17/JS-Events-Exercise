@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+
+  <span id="text"><span id="closeArrow">▶</span><span id="openArrow" hidden>▼</span> Sweeties(click me)! </span>
+  <ul hidden>
+    <li>Cake</li>
+    <li>Donut</li>
+    <li>Honey</li>
+  </ul>
+
+  <script>
+    const unorderdList = document.getElementsByTagName("ul")[0]
+    text.addEventListener("click", function(event){
+      unorderdList.hidden = !unorderdList.hidden
+      closeArrow.hidden = !closeArrow.hidden;
+      openArrow.hidden = !openArrow.hidden;
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="carousel.css">
+</head>
+
+<body>
+
+  <!-- create your markup and styles -->
+  <div id="carousel">
+    <button class="arrow">⇦</button>
+    <ul>
+      <li><img src="https://en.js.cx/carousel/1.png"></li>
+      <li><img src="https://en.js.cx/carousel/2.png"></li>
+      <li><img src="https://en.js.cx/carousel/3.png"></li>
+      <li><img src="https://en.js.cx/carousel/4.png"></li>
+      <li><img src="https://en.js.cx/carousel/5.png"></li>
+      <li><img src="https://en.js.cx/carousel/6.png"></li>
+      <li><img src="https://en.js.cx/carousel/7.png"></li>
+      <li><img src="https://en.js.cx/carousel/8.png"></li>
+      <li><img src="https://en.js.cx/carousel/9.png"></li>
+      <li><img src="https://en.js.cx/carousel/10.png"></li>
+    </ul>
+    <button class="arrow">⇨</button>
+  </div>
+
+  <script>
+    // label the images to visually track them, just for convenience,
+    // this code can be removed
+    let i = 1;
+    for(let li of carousel.querySelectorAll('li')) {
+      li.style.position = 'relative';
+      li.insertAdjacentHTML('beforeend', `<span style="position:absolute;left:0;top:0">${i}</span>`);
+      i++;
+    }
+
+    // ...your code to make carousel alive!
+    const buttons = document.querySelectorAll(".arrow");
+    const left = buttons[0]
+    const right = buttons[1]
+    const uL = document.getElementsByTagName("ul")[0];
+    const picW = 130;
+    const pics = 1
+    let position = 0;
+    right.onclick = function(){
+      uL.style.marginLeft = position - picW*pics + "px";
+      position -= picW*pics; 
+    }
+    left.onclick = function(){
+      uL.style.marginLeft = position + picW*pics + "px";
+      position += picW*pics;
+    }
+  </script>
+
+</body>
+</html>
